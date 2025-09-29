@@ -2,6 +2,11 @@
 
 ¡Bienvenido al **Gestor de Productos**\! Esta es una **solución Full-Stack** diseñada para pequeños negocios, combinando una API robusta y un panel de administración para la gestión de inventario y catálogo en tiempo real.
 
+| ![Screenshot1](assets/screenshot1.png) | ![Screenshot2](assets/screenshot2.png) |
+|----------------------------------------|----------------------------------------|
+| ![Screenshot3](assets/screenshot3.png) | ![Screenshot4](assets/screenshot4.png) |
+
+
 -----
 
 ## 🌟 Resumen de la Solución

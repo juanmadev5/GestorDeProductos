@@ -19,6 +19,36 @@ const ADMIN_PANEL_PATH = path.join(process.cwd(), "src", "index.html");
  * Función central para manejar todas las rutas de la API.
  */
 async function handleRequest(req, res) {
+  // --- Servir archivos estáticos de src ---
+  if (req.method === "GET") {
+    let staticFilePath;
+    if (req.url === "/") {
+      staticFilePath = ADMIN_PANEL_PATH;
+    } else {
+      // Elimina el primer '/' y busca el archivo en src
+      staticFilePath = path.join(process.cwd(), "src", req.url.replace(/^\//, ""));
+    }
+    if (fs.existsSync(staticFilePath) && fs.statSync(staticFilePath).isFile()) {
+      // Determina el tipo de contenido
+      const ext = path.extname(staticFilePath);
+      const mimeTypes = {
+        ".html": "text/html",
+        ".js": "application/javascript",
+        ".css": "text/css",
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".gif": "image/gif",
+        ".svg": "image/svg+xml",
+        ".ico": "image/x-icon",
+      };
+      const contentType = mimeTypes[ext] || "application/octet-stream";
+      const content = fs.readFileSync(staticFilePath);
+      res.writeHead(200, { "Content-Type": contentType });
+      res.end(content);
+      return;
+    }
+  }
   // 🔹 Pre-procesamiento de URL para obtener ID y ruta
   const urlParts = req.url.split("/").filter(Boolean);
   const [route, idParam] = urlParts; // Destructuring: ej. ['products', '123']
@@ -26,22 +56,6 @@ async function handleRequest(req, res) {
   const isProductRoute = route === PRODUCTS_ROUTE;
   const productId = isProductRoute && idParam ? parseInt(idParam, 10) : null;
   const isProductsCollection = isProductRoute && urlParts.length === 1;
-
-  if (req.url === "/" && req.method === "GET") {
-    try {
-      const content = fs.readFileSync(ADMIN_PANEL_PATH, "utf-8");
-
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(content);
-      return;
-    } catch (err) {
-      console.error("Error al leer index.html:", err);
-      sendResponse(res, 500, {
-        error: "Error interno: No se pudo cargar el panel de administración.",
-      });
-      return;
-    }
-  }
 
   if (isProductsCollection) {
     // ----------------------------------------------------

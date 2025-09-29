@@ -18,3 +18,11 @@ EXPOSE 3000
 
 # Comando para iniciar el servidor
 CMD ["npm", "start"]
+
+# Construye la imagen Docker:
+# docker build -t gestor-productos .
+
+# Crea y ejecuta el contenedor
+# docker run -d -p 3000:3000 --name gestor-productos gestor-productos
+
+# Accede a la aplicacion en el navegador en http://localhost:3000

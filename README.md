@@ -102,6 +102,30 @@ Accede al Panel de Administración en tu navegador: **[http://localhost:3000](ht
 
 -----
 
+## 🐳 Docker: Construcción y Despliegue
+
+Puedes ejecutar el proyecto fácilmente en cualquier entorno usando Docker.
+
+### 1. Construir la imagen Docker
+
+Ejecuta el siguiente comando en la raíz del proyecto:
+
+```pwsh
+docker build -t gestor-productos .
+```
+
+### 2. Ejecutar el contenedor
+
+Esto inicia la aplicación en el puerto 3000:
+
+```pwsh
+docker run -d -p 3000:3000 --name gestor-productos gestor-productos
+```
+
+### 3. Acceder a la aplicación
+
+Abre tu navegador en [http://localhost:3000](http://localhost:3000)
+
 ## 🤝 Uso y Contribución
 
 ### Uso

@@ -121,4 +121,4 @@ Este proyecto está distribuido bajo la licencia **MIT**.
 
 -----
 
-*Desarrollado con ❤️ por el equipo de GestorDeProductos.*
+*Desarrollado con ❤️ por JM Dev*
